@@ -17,8 +17,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
+        'nama',
         'email',
+        'role',
+        'alamat',
+        'nomor_telepon',
+        'tanggal_lahir',
         'password',
     ];
 
@@ -43,5 +48,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class, 'user_id', 'id');
+    }
+
+    public function wishlist()
+    {
+        return $this->hasMany(Wishlist::class, 'user_id', 'id');
     }
 }
